@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../services/challenge_service.dart';
 
 /// This widget is not currently taking up the correct amount of space. It is inside of a `Row`
 /// inside the `ChallengePage` widget: make it take up half of the available space (without
@@ -14,33 +16,26 @@ import 'package:flutter/material.dart';
 /// - Do not modify the `ChallengeService` in any way
 /// - The button should increment the `ChallengeState.counter` when pressed
 /// - The up-to-date value of `ChallengeState.counter` should be displayed in a Text widget
-class Challenge2Widget extends StatefulWidget {
+
+class Challenge2Widget extends ConsumerWidget {
   const Challenge2Widget({super.key});
 
-  @override
-  State<Challenge2Widget> createState() => _Challenge2WidgetState();
-}
-
-class _Challenge2WidgetState extends State<Challenge2Widget> {
-  int _counter = 0;
-
-  void _onPressed() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text('You\'ve pressed the button: $_counter times'),
-        MaterialButton(
-          onPressed: _onPressed,
-          child: const Text('Press me!'),
-        )
-      ],
+  Widget build(BuildContext context, WidgetRef ref) {
+    final counter = ref.watch(challengeService).counter;
+    return Expanded(
+      flex: 1,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text('You\'ve pressed the button: $counter times'),
+          MaterialButton(
+            onPressed: () => ref.read(challengeService.notifier).incrementCounter(),
+            child: const Text('Press me!'),
+          )
+        ],
+      ),
     );
   }
 }

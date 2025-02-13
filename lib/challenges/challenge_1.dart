@@ -22,8 +22,8 @@ class Challenge1Widget extends StatelessWidget {
       color: Colors.red,
       child: Padding(
         padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: Wrap(
+          crossAxisAlignment: WrapCrossAlignment.start,
           children: _doNotChangeMeChildren,
         ),
       ),
