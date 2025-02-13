@@ -22,9 +22,17 @@ class Challenge1Widget extends StatelessWidget {
       color: Colors.red,
       child: Padding(
         padding: EdgeInsets.all(16),
-        child: Wrap(
-          crossAxisAlignment: WrapCrossAlignment.start,
-          children: _doNotChangeMeChildren,
+        child: CustomScrollView(
+          slivers: [
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: _doNotChangeMeChildren,
+              ),
+            )
+          ],
         ),
       ),
     );
